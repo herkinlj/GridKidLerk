@@ -10,7 +10,7 @@ class Operation
     def to_s
       raise "Not Implemented"
     end
-  end
+end
   
   class Add < Operation
     def evaluate(environment)
@@ -42,8 +42,24 @@ end
 
 class Multiply < Operation
     def evaluate(environment)
-
+      if @operand1 == :float || @operand2 == :float
+        FloatPrimitive.new(@operand1.evaluate(environment).value * @operand2.evaluate(environment).value)
+      else
+        IntegerPrimitive.new(@operand1.evaluate(environment).value * @operand2.evaluate(environment).value)
+      end
     end
+end
+
+class Equals < Operation
+  def evaluate(environment)
+
+  end
+end
+
+class Not < Operation
+  def evaluate(environment)
+
+  end
 end
 
   
