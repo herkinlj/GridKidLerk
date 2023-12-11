@@ -57,4 +57,3 @@ class StringPrimitive < Primitive
   #   self
   # end
 end
-end

@@ -13,7 +13,7 @@ class Addition < Operation
     right = @operand_two.evaluate(environment)
     if left == :float && right == :float
       FloatPrimitive.new(left.value + right.value)
-    elsif left == :integer && right == :integer
+    elsif left == :int && right == :int
       IntegerPrimitive.new(left.value + right.value)
     else
       raise RuntimeError.new("Cannot add #{left} and #{right}.  Operands must be of type Integer or Float")
@@ -27,7 +27,7 @@ class Subtraction < Operation
     right = @operand_two.evaluate(environment)
     if left == :float && right == :float
       FloatPrimitive.new(left.value - right.value)
-    elsif left == :integer && right == :integer
+    elsif left == :int && right == :int
       IntegerPrimitive.new(left.value - right.value)
     else
       raise RuntimeError.new("Cannot subtract #{left} and #{right}.  Operands must be of type Integer or Float")
@@ -44,7 +44,7 @@ class Divide < Operation
     end
     if left == :float && right == :float
       FloatPrimitive.new(left.value / right.value)
-    elsif left == :integer && right == :integer
+    elsif left == :int && right == :int
     else
       raise RuntimeError.new("Cannot divide #{left} and #{right}.  Operands must be of type Integer or Float")
     end
@@ -57,7 +57,7 @@ class Multiply < Operation
     right = @operand_two.evaluate(environment)
     if left == :float && right == :float
       FloatPrimitive.new(left.value * right.value)
-    elsif left == :integer && right == :integer
+    elsif left == :int && right == :int
       IntegerPrimitive.new(left.value * right.value)
     else
       raise RuntimeError.new("Cannot multiply #{left} and #{left}.  Operands must be of type Integer or Float")
@@ -72,7 +72,7 @@ class Modulus < Operation
     if left == :float && right == :float
       FloatPrimitive.new(left.value % right.value)
 
-    elsif left == :integer && right == :integer
+    elsif left == :int && right == :int
       IntegerPrimitive.new(left.value % right.value)
     else
       raise RuntimeError.new("Cannot mod #{left} and #{right}.  Operands must be of type Integer or Float")
@@ -86,7 +86,7 @@ class Exponent < Operation
     right = @operand_two.evaluate(environment)
     if left == :float && right == :float
       FloatPrimitive.new(left.value ** right.value)
-    elsif left == :integer && right == :integer
+    elsif left == :int && right == :int
       IntegerPrimitive.new(left.value ** right.value)
     else
       raise RuntimeError.new("Cannot exponentiate #{left} and #{right}.  Operands must be of type Integer or Float")
@@ -98,7 +98,7 @@ class BitwiseAnd < Operation
   def evaluate(environment)
     left = @operand_one.evaluate(environment)
     right = @operand_two.evaluate(environment)
-    if left == :integer && right == :integer
+    if left == :int && right == :int
       IntegerPrimitive.new(left.value & right.value)
     else
       raise RuntimeError.new("Cannot bitwise and #{left} and #{right}.  Both operands must be of type Integer")
@@ -110,7 +110,7 @@ class BitwiseOr < Operation
   def evaluate(environment)
     left = @operand_one.evaluate(environment)
     right = @operand_two.evaluate(environment)
-    if left == :integer && right == :integer
+    if left == :int && right == :int
       IntegerPrimitive.new(left.value | right.value)
     else
       raise runtime_error("Cannot bitwise or #{left} and #{right}.  Both operands must be of type Integer")
@@ -122,7 +122,7 @@ class BitwiseXor < Operation
   def evaluate(environment)
     left = @operand_one.evaluate(environment)
     right = @operand_two.evaluate(environment)
-    if left == :integer && right == :integer
+    if left == :int && right == :int
       IntegerPrimitive.new(left.value ^ right.value)
     else
       raise RuntimeError.new("Cannot bitwise xor #{left} and #{right}.  Both operands must be of type Integer")
@@ -134,7 +134,7 @@ class BitwiseLeftShift < Operation
   def evaluate(environment)
     left = @operand_one.evaluate(environment)
     right = @operand_two.evaluate(environment)
-    if left == :integer && right == :integer
+    if left == :int && right == :int
       IntegerPrimitive.new(left.value << right.value)
     else
       raise RuntimeError.new("Cannot bitwise left shift #{left} and #{right}.  Both operands must be of type Integer")
@@ -146,7 +146,7 @@ class BitwiseRightShift < Operation
   def evaluate(environment)
     left = @operand_one.evaluate(environment)
     right = @operand_two.evaluate(environment)
-    if left == :integer && right == :integer
+    if left == :int && right == :int
       IntegerPrimitive.new(left.value >> right.value)
     else
       raise RuntimeError.new("Cannot bitwise right shift #{left} and #{right}.  Both operands must be of type Integer")
@@ -158,7 +158,7 @@ class LessThan < Operation
   def evaluate(environment)
     left = @operand_one.evaluate(environment)
     right = @operand_two.evaluate(environment)
-    if (left == :integer || left == :float) && (right == :integer || right == :float)
+    if (left == :int || left == :float) && (right == :int || right == :float)
       BooleanPrimitive.new(left.value < right.value)
     else
       raise RuntimeError.new("Cannot compare #{left} and #{right}.  Operands must be of type Integer or Float")
@@ -170,7 +170,7 @@ class GreaterThan < Operation
   def evaluate(environment)
     left = @operand_one.evaluate(environment)
     right = @operand_two.evaluate(environment)
-    if (left == :integer || left == :float) && (right == :integer || right == :float)
+    if (left == :int || left == :float) && (right == :int || right == :float)
       BooleanPrimitive.new(left.value > right.value)
     else
       raise RuntimeError.new("Cannot compare #{left} and #{right}.  Operands must be of type Integer or Float")
@@ -182,7 +182,7 @@ class GreaterThanOrEqualTo < GreaterThan
   def evaluate(environment)
     left = @operand_one.evaluate(environment)
     right = @operand_two.evaluate(environment)
-    if (left == :integer || left == :float) && (right == :integer || right == :float)
+    if (left == :int || left == :float) && (right == :int || right == :float)
       BooleanPrimitive.new(left.value >= right.value)
     else
       raise RuntimeError.new("Cannot compare #{left} and #{right}. Operands must be of type Integer or Float")
@@ -194,7 +194,7 @@ class LessThanOrEqualTo < LessThan
   def evaluate(environment)
     left = @operand_one.evaluate(environment)
     right = @operand_two.evaluate(environment)
-    if (left == :integer || left == :float) && (right == :integer || right == :float)
+    if (left == :int || left == :float) && (right == :int || right == :float)
       BooleanPrimitive.new(left.value <= right.value)
     else
       raise RuntimeError.new("Cannot compare #{left} and #{right}. Operands must be of type Integer or Float")
@@ -206,7 +206,7 @@ class EqualTo < Operation
   def evaluate(environment)
     left = @operand_one.evaluate(environment)
     right = @operand_two.evaluate(environment)
-    if (left == :integer || left == :float) && (right == :integer || right == :float)
+    if (left == :int || left == :float) && (right == :int || right == :float)
       BooleanPrimitive.new(left.value == right.value)
     else
       raise RuntimeError.new("Cannot compare #{left} and #{right}. Operands must be of type Integer or Float")
@@ -218,7 +218,7 @@ class NotEqualTo < Operation
   def evaluate(environment)
     left = @operand_one.evaluate(environment)
     right = @operand_two.evaluate(environment)
-    if (left == :integer || left == :float) && (right == :integer || right == :float)
+    if (left == :int || left == :float) && (right == :int || right == :float)
       BooleanPrimitive.new(left.value != right.value)
     else
       raise RuntimeError.new("Cannot compare #{left} and #{right}. Operands must be of type Integer or Float")
@@ -275,7 +275,7 @@ end
 class Int_to_float < Operation
   def evaluate(environment)
     left = @operand_one.evaluate(environment)
-    if left == :integer
+    if left == :int
       FloatPrimitive.new(left.value)
     else
       raise RuntimeError.new("Cannot convert #{left} to float")
@@ -297,7 +297,15 @@ end
 
 class Max
   def evaluate(environment)
-    left = @operand_one.evaluate(environment)
-    right = @operand_two.evaluate(environment)
-    if left == :integer && right == :integer
+    num_list = environment
+    max_val = environment[0]
+    num_list do |item|
+
+      if item == :int || item == :float
+        max_val = item if item > max_val
+      else
+        raise RuntimeError.new("Cannot find max of list as #{item.}")
+    end
+
+    end
 end
