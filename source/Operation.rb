@@ -11,7 +11,7 @@ class Addition < Operation
   def evaluate(environment)
     left = @operand_one.evaluate(environment)
     right = @operand_two.evaluate(environment)
-    if left == :float && right == :float
+    if left == :float || right == :float
       FloatPrimitive.new(left.value + right.value)
     elsif left == :int && right == :int
       IntegerPrimitive.new(left.value + right.value)
@@ -25,7 +25,7 @@ class Subtraction < Operation
   def evaluate(environment)
     left = @operand_one.evaluate(environment)
     right = @operand_two.evaluate(environment)
-    if left == :float && right == :float
+    if left == :float || right == :float
       FloatPrimitive.new(left.value - right.value)
     elsif left == :int && right == :int
       IntegerPrimitive.new(left.value - right.value)
@@ -42,7 +42,7 @@ class Divide < Operation
     if left == 0.0 || right == 0.0
       raise RuntimeError.new("Cannot divide by 0")
     end
-    if left == :float && right == :float
+    if left == :float || right == :float
       FloatPrimitive.new(left.value / right.value)
     elsif left == :int && right == :int
     else
@@ -55,7 +55,7 @@ class Multiply < Operation
   def evaluate(environment)
     left = @operand_one.evaluate(environment)
     right = @operand_two.evaluate(environment)
-    if left == :float && right == :float
+    if left == :float || right == :float
       FloatPrimitive.new(left.value * right.value)
     elsif left == :int && right == :int
       IntegerPrimitive.new(left.value * right.value)
@@ -69,7 +69,7 @@ class Modulus < Operation
   def evaluate(environment)
     left = @operand_one.evaluate(environment)
     right = @operand_two.evaluate(environment)
-    if left == :float && right == :float
+    if left == :float || right == :float
       FloatPrimitive.new(left.value % right.value)
 
     elsif left == :int && right == :int
@@ -84,7 +84,7 @@ class Exponent < Operation
   def evaluate(environment)
     left = @operand_one.evaluate(environment)
     right = @operand_two.evaluate(environment)
-    if left == :float && right == :float
+    if left == :float || right == :float
       FloatPrimitive.new(left.value ** right.value)
     elsif left == :int && right == :int
       IntegerPrimitive.new(left.value ** right.value)
@@ -295,17 +295,17 @@ class Float_to_int < Operation
   end
 end
 
-class Max
-  def evaluate(environment)
-    num_list = environment
-    max_val = environment[0]
-    num_list do |item|
-
-      if item == :int || item == :float
-        max_val = item if item > max_val
-      else
-        raise RuntimeError.new("Cannot find max of list as #{item.}")
-    end
-
-    end
-end
+# class Max
+#   def evaluate(environment)
+#     num_list = environment
+#     max_val = environment[0]
+#     num_list do |item|
+#
+#       if item == :int || item == :float
+#         max_val = item if item > max_val
+#       else
+#         raise RuntimeError.new("Cannot find max of list as #{item.}")
+#     end
+#
+#     end
+# end
