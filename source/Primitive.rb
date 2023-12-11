@@ -1,32 +1,60 @@
 class Primitive
-    attr_reader :value, :tag
-    def to_s
-      @value.to_s
-    end
+  attr_accessor :value, :tag
+
+  def initialize(value)
+    @value = value
+  end
+
+  def evaluate(environment)
+    self
+  end
+
+  def to_s
+    @value.to_s
+  end
 end
-  
+
 class IntegerPrimitive < Primitive
-    def initialize(value)
-        @value = value
-        @tag = :integer
-    end
+  def initialize(value)
+    super(value)
+    @tag = :int
+  end
 end
+
+# def evaluate(environment)
+#   self
+# end
+
 class FloatPrimitive < Primitive
-    def initialize(value)
-        @value = value
-        @tag = :float
-    end
+  def initialize(value)
+    super(value)
+    @tag = :float
+  end
+
+  # def evaluate(environment)
+  #   self
+  # end
 end
+
 class BooleanPrimitive < Primitive
-    def initialize(value)
-        @value = value
-        @tag = :bool
-    end
+  def initialize(value)
+    super(value)
+    @tag = :bool
+  end
+
+  # def evaluate(environment)
+  #   self
+  # end
 end
+
 class StringPrimitive < Primitive
-    def initialize(value)
-        @value = value
-        @tag = :string
-    end
+  def initialize(value)
+    super(value)
+    @tag = :string
+  end
+
+  # def evaluate(environment)
+  #   self
+  # end
 end
-  
+end
