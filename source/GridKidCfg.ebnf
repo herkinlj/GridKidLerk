@@ -1,0 +1,36 @@
+expression ::= Or_log
+Or_log ::= Or_log <||> And
+    | And
+
+ And ::= And <&&> BitwiseOr
+    | BitwiseOr
+
+ BitwiseOr ::= BitwiseOr | BitwiseXor
+    | BitwiseXor
+
+ BitwiseXor ::= BitwiseXor <^> BitwiseAnd
+    | BitwiseAnd
+
+ BitwiseAnd ::= BitwiseAnd <&> Equals
+    | Equals
+
+ Equals ::= Equals <==> LogicalOperands
+    | Equals <!=> LogicalOperands
+    | LogicalOperands
+
+LogicalOperands ::= LogicalOperands <<> BitShift
+    | LogicalOperands <<=> BitShift
+    | LogicalOperands <>> BitShift
+    | LogicalOperands <>=> BitShift
+    | BitShift
+
+BitShift ::= BitShift >> BasicArithmetic
+    | BitShift << BasicArithmetic
+    | BasicArithmetic
+
+BasicArithmetic ::= BasicArithmetic + ComplexArithmetic
+    | BasicArithmetic - ComplexArithmetic
+    | ComplexArithmetic
+
+ComplexArithmetic ::= ComplexArithmetic * ExponentialArithmetic
+
