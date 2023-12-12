@@ -33,4 +33,14 @@ BasicArithmetic ::= BasicArithmetic + ComplexArithmetic
     | ComplexArithmetic
 
 ComplexArithmetic ::= ComplexArithmetic * ExponentialArithmetic
+    | ComplexArithmetic / ExponentialArithmetic
+    | ExponentialArithmetic
+
+ExponentialArithmetic ::= ExponentialArithmetic ** Negatiion
+    | atom
+
+atom = (expresion) | Cell
+    | IntegerPrimitive
+    | FloatPrimitive
+    | BooleanPrimitive
 
